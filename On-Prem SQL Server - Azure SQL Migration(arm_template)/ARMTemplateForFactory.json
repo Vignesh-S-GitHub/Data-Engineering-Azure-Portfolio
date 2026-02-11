@@ -1,0 +1,257 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "dev-migration-adf-01"
+        },
+        "ls_onprem_sql_password": {
+            "type": "secureString",
+            "metadata": "Secure string for 'password' of 'ls_onprem_sql'"
+        },
+        "ls_azure_sql_password": {
+            "type": "secureString",
+            "metadata": "Secure string for 'password' of 'ls_azure_sql'"
+        },
+        "ls_onprem_sql_properties_typeProperties_server": {
+            "type": "string",
+            "defaultValue": "localhost"
+        },
+        "ls_onprem_sql_properties_typeProperties_database": {
+            "type": "string",
+            "defaultValue": "BikeStores"
+        },
+        "ls_onprem_sql_properties_typeProperties_userName": {
+            "type": "string",
+            "defaultValue": "vignesh"
+        },
+        "ls_azure_sql_properties_typeProperties_server": {
+            "type": "string",
+            "defaultValue": "dev-migration-sql.database.windows.net"
+        },
+        "ls_azure_sql_properties_typeProperties_database": {
+            "type": "string",
+            "defaultValue": "dev-migration-db"
+        },
+        "ls_azure_sql_properties_typeProperties_userName": {
+            "type": "string",
+            "defaultValue": "azureadmin"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/dev-migration-shir')]",
+            "type": "Microsoft.DataFactory/factories/integrationRuntimes",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "type": "SelfHosted",
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_onprem_sql')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "SqlServer",
+                "typeProperties": {
+                    "server": "[parameters('ls_onprem_sql_properties_typeProperties_server')]",
+                    "database": "[parameters('ls_onprem_sql_properties_typeProperties_database')]",
+                    "encrypt": "mandatory",
+                    "trustServerCertificate": true,
+                    "authenticationType": "SQL",
+                    "userName": "[parameters('ls_onprem_sql_properties_typeProperties_userName')]",
+                    "password": {
+                        "type": "SecureString",
+                        "value": "[parameters('ls_onprem_sql_password')]"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "dev-migration-shir",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/dev-migration-shir')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_azure_sql')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureSqlDatabase",
+                "typeProperties": {
+                    "server": "[parameters('ls_azure_sql_properties_typeProperties_server')]",
+                    "database": "[parameters('ls_azure_sql_properties_typeProperties_database')]",
+                    "encrypt": "mandatory",
+                    "trustServerCertificate": false,
+                    "authenticationType": "SQL",
+                    "userName": "[parameters('ls_azure_sql_properties_typeProperties_userName')]",
+                    "password": {
+                        "type": "SecureString",
+                        "value": "[parameters('ls_azure_sql_password')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/pl-copy-bikestores')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "copy-bikestores",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "SqlServerSource",
+                                "queryTimeout": "02:00:00",
+                                "partitionOption": "None"
+                            },
+                            "sink": {
+                                "type": "AzureSqlSink",
+                                "writeBehavior": "insert",
+                                "sqlWriterUseTableLock": false,
+                                "tableOption": "autoCreate",
+                                "disableMetricsCollection": false
+                            },
+                            "enableStaging": false,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "typeConversion": true,
+                                "typeConversionSettings": {
+                                    "allowDataTruncation": true,
+                                    "treatBooleanAsNumber": false
+                                }
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "src_onprem_sql",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "sik_azure_sql",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {}
+                },
+                "annotations": []
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/datasets/src_onprem_sql')]",
+                "[concat(variables('factoryId'), '/datasets/sik_azure_sql')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/src_onprem_sql')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_onprem_sql",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [
+                    {
+                        "name": "category_id",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "category_name",
+                        "type": "varchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "production",
+                    "table": "categories"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/ls_onprem_sql')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/sik_azure_sql')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_azure_sql",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "production",
+                    "table": "categories"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/ls_azure_sql')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/cpy_trigger')]",
+            "type": "Microsoft.DataFactory/factories/triggers",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "runtimeState": "Started",
+                "pipelines": [
+                    {
+                        "pipelineReference": {
+                            "referenceName": "pl-copy-bikestores",
+                            "type": "PipelineReference"
+                        },
+                        "parameters": {}
+                    }
+                ],
+                "type": "ScheduleTrigger",
+                "typeProperties": {
+                    "recurrence": {
+                        "frequency": "Hour",
+                        "interval": 15,
+                        "startTime": "2026-02-10T17:15:00",
+                        "timeZone": "India Standard Time"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/pipelines/pl-copy-bikestores')]"
+            ]
+        }
+    ]
+}

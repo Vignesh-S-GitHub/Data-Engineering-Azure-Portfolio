@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "value": "dev-migration-adf-01"
+        },
+        "ls_onprem_sql_password": {
+            "value": ""
+        },
+        "ls_azure_sql_password": {
+            "value": ""
+        },
+        "ls_onprem_sql_properties_typeProperties_server": {
+            "value": "localhost"
+        },
+        "ls_onprem_sql_properties_typeProperties_database": {
+            "value": "BikeStores"
+        },
+        "ls_onprem_sql_properties_typeProperties_userName": {
+            "value": "vignesh"
+        },
+        "ls_azure_sql_properties_typeProperties_server": {
+            "value": "dev-migration-sql.database.windows.net"
+        },
+        "ls_azure_sql_properties_typeProperties_database": {
+            "value": "dev-migration-db"
+        },
+        "ls_azure_sql_properties_typeProperties_userName": {
+            "value": "azureadmin"
+        }
+    }
+}
