@@ -10,7 +10,7 @@ The goal is to simulate a real enterprise migration scenario where legacy on-pre
 
 ## 🧱 Architecture
 
-![Pipeline](01-onprem-sql-to-azure/screenshots/Onprem to Azure.png)
+![Pipeline](screenshots/Onprem to Azure.png)
 
 ### Flow Explanation
 
@@ -97,19 +97,19 @@ README.md
 
 Add your screenshots inside `/screenshots` folder and reference them here:
 
-![On-prem Linked services](01-onprem-sql-to-azure/screenshots/onprem-linked-services.png)
+![On-prem Linked services](screenshots/onprem-linked-services.png)
 
-![Azure Linked services](01-onprem-sql-to-azure/screenshots/azure-linked-services.png)
+![Azure Linked services](screenshots/azure-linked-services.png)
 
-![SHIR status online](01-onprem-sql-to-azure/screenshots/shir-status-online.png)
+![SHIR status online](screenshots/shir-status-online.png)
 
-![Azure Data Factory pipeline canvas](01-onprem-sql-to-azure/screenshots/pipeline-canvas.png)
+![Azure Data Factory pipeline canvas](screenshots/pipeline-canvas.png)
 
-![Pipeline run succeeded](01-onprem-sql-to-azure/screenshots/pipeline-success.png)
+![Pipeline run succeeded](screenshots/pipeline-success.png)
 
-![OnpremSQL table with copied rows](01-onprem-sql-to-azure/screenshots/onprem-rows.png)
+![OnpremSQL table with copied rows](screenshots/onprem-rows.png)
 
-![AzureSQL table with copied rows](01-onprem-sql-to-azure/screenshots/azure-rows.png)
+![AzureSQL table with copied rows](screenshots/azure-rows.png)
 
 ---
 
