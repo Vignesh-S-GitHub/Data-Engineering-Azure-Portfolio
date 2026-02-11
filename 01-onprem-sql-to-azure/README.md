@@ -38,33 +38,33 @@ SHIR acts as a secure bridge between local infrastructure and Azure.
 
 ## 🚀 Implementation Steps
 
-### Step 1 — Create On-Prem Database
+### Step 1 - Create On-Prem Database
 
 * Created [BikeStores](https://www.sqlservertutorial.net/wp-content/uploads/SQL-Server-Sample-Database.zip) sample database
 * Defined schemas and relational tables
 
-### Step 2 — Create Azure SQL Database
+### Step 2 - Create Azure SQL Database
 
 * Provisioned Azure SQL target database
 * Configured firewall access
 
-### Step 3 — Setup Azure Data Factory
+### Step 3 - Setup Azure Data Factory
 
 * Created ADF instance
 * Installed Self-Hosted Integration Runtime
 
-### Step 4 — Create Linked Services
+### Step 4 - Create Linked Services
 
 * On-prem SQL connection
 * Azure SQL connection
 
-### Step 5 — Build Copy Pipeline
+### Step 5 - Build Copy Pipeline
 
 * Created Copy activity
 * Configured source & sink datasets
 * Executed pipeline
 
-### Step 6 — Validate Migration
+### Step 6 - Validate Migration
 
 * Verified rows copied successfully
 * Confirmed schema integrity
@@ -158,4 +158,4 @@ to practice enterprise migration workflows.
 
 ## 📜 License
 
-Educational project — free to reuse and modify.
+Educational project - free to reuse and modify.
