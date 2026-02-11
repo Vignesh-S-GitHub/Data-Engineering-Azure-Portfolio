@@ -16,12 +16,6 @@ Each project focuses on a specific concept such as:
 ### 01 – SQL Server to Azure SQL using Azure Data Factory
 Hybrid migration pipeline using ADF and Self-Hosted Integration Runtime.
 
-### 02 – Dynamic Multi-Table Copy using ADF
-Automated pipeline to copy multiple tables dynamically.
-
-### 03 – Data Ingestion to Azure Data Lake
-Ingest raw data into ADLS using ADF.
-
 *(More projects coming…)*
 
 ---
