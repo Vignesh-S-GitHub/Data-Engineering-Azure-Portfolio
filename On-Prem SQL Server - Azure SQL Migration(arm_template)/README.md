@@ -98,13 +98,22 @@ README.md
 Add your screenshots inside `/screenshots` folder and reference them here:
 
 ```
-![On-prem Linked services](screenshots/On-prem Linked services.png)
-![Azure Linked services](screenshots/Azure Linked services.png)
-![SHIR status online](screenshots/SHIR status online.png)
-![Azure Data Factory pipeline canvas](screenshots/Azure Data Factory pipeline canvas.png)
-![Pipeline run succeeded](screenshots/Pipeline run succeeded.png)
-![OnpremSQL table with copied rows](screenshots/OnpremSQL table with copied rows.png)
-![AzureSQL table with copied rows](screenshots/Azure SQL table with copied rows.png)
+## 📸 Screenshots
+
+![On-prem Linked services](screenshots/onprem-linked-services.png)
+
+![Azure Linked services](screenshots/azure-linked-services.png)
+
+![SHIR status online](screenshots/shir-status-online.png)
+
+![Azure Data Factory pipeline canvas](screenshots/pipeline-canvas.png)
+
+![Pipeline run succeeded](screenshots/pipeline-success.png)
+
+![OnpremSQL table with copied rows](screenshots/onprem-rows.png)
+
+![AzureSQL table with copied rows](screenshots/azure-rows.png)
+
 
 ```
 
@@ -144,3 +153,4 @@ to practice enterprise migration workflows.
 ## 📜 License
 
 Educational project — free to reuse and modify.
+
