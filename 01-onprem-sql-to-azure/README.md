@@ -40,7 +40,7 @@ SHIR acts as a secure bridge between local infrastructure and Azure.
 
 ### Step 1 — Create On-Prem Database
 
-* Created BikeStores sample database
+* Created [BikeStores](https://www.sqlservertutorial.net/wp-content/uploads/SQL-Server-Sample-Database.zip) sample database
 * Defined schemas and relational tables
 
 ### Step 2 — Create Azure SQL Database
