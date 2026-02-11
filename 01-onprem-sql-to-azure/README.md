@@ -10,7 +10,7 @@ The goal is to simulate a real enterprise migration scenario where legacy on-pre
 
 ## 🧱 Architecture
 
-![Pipeline](screenshots/Onprem to Azure.png)
+![Pipeline](screenshots/Architecture.png)
 
 ### Flow Explanation
 
@@ -95,19 +95,31 @@ README.md
 
 ## 📸 Screenshots
 
-Add your screenshots inside `/screenshots` folder and reference them here:
+### On-prem Linked services
 
 ![On-prem Linked services](screenshots/onprem-linked-services.png)
 
+### Azure Linked services
+
 ![Azure Linked services](screenshots/azure-linked-services.png)
+
+### SHIR status online
 
 ![SHIR status online](screenshots/shir-status-online.png)
 
+### Azure Data Factory pipeline canvas
+
 ![Azure Data Factory pipeline canvas](screenshots/pipeline-canvas.png)
+
+### Pipeline run succeeded
 
 ![Pipeline run succeeded](screenshots/pipeline-success.png)
 
+### OnpremSQL table with copied rows
+
 ![OnpremSQL table with copied rows](screenshots/onprem-rows.png)
+
+### AzureSQL table with copied rows
 
 ![AzureSQL table with copied rows](screenshots/azure-rows.png)
 
