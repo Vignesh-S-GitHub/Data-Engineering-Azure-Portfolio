@@ -1,6 +1,6 @@
 <div align="center">
 
-# Azure Data Engineering Portfolio
+# ☁️ Azure Data Engineering Portfolio
 ### Hands-on cloud data integration and migration labs
 
 **Azure Data Factory · Azure SQL · Self-Hosted Integration Runtime**
@@ -34,7 +34,19 @@ A learning portfolio of Azure data engineering projects. The current project dem
 - `01-onprem-sql-to-azure/factory/` — Data Factory assets
 - `01-onprem-sql-to-azure/linkedTemplates/` — linked ARM template artifacts
 - `01-onprem-sql-to-azure/screenshots/` — setup and execution evidence
-- `ARMTemplateForFactory.json` — exported factory template
+- `01-onprem-sql-to-azure/ARMTemplateForFactory.json` — exported factory template
+
+## Getting started
+
+The lab requires an Azure subscription, an on-premises SQL Server source, an Azure SQL destination, and a host that can run the Self-Hosted Integration Runtime.
+
+1. Open the [project walkthrough](01-onprem-sql-to-azure/README.md).
+2. Review the architecture and configure the source/destination linked services.
+3. Register and connect the Self-Hosted Integration Runtime.
+4. Run the ADF copy pipeline and compare source and destination rows.
+5. Use the exported ARM templates when rebuilding the factory configuration.
+
+The screenshots provide recorded setup and execution evidence. Check your own pipeline output and destination data when reproducing the lab.
 
 ## Rebuild and cost awareness
 
