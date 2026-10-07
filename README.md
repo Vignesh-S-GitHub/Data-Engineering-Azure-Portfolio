@@ -1,49 +1,45 @@
-# Data Engineering – Azure Portfolio
+<div align="center">
 
-This repository contains a collection of hands-on Azure Data Engineering projects built to demonstrate real-world cloud data integration, migration, and pipeline design patterns.
+# Azure Data Engineering Portfolio
+### Hands-on cloud data integration and migration labs
 
-Each project focuses on a specific concept such as:
-- On-prem to cloud data migration
-- Azure Data Factory pipelines
-- Self-hosted integration runtime
-- Azure SQL and storage integration
-- Automation and infrastructure as code
+**Azure Data Factory · Azure SQL · Self-Hosted Integration Runtime**
 
----
+</div>
 
-## 📁 Projects Included
+A learning portfolio of Azure data engineering projects. The current project demonstrates a hybrid migration from an on-premises SQL Server database to Azure SQL Database using Azure Data Factory (ADF) and a Self-Hosted Integration Runtime (SHIR).
 
-### 01 – SQL Server to Azure SQL using Azure Data Factory
-Hybrid migration pipeline using ADF and Self-Hosted Integration Runtime.
+## Project catalog
 
-*(More projects coming…)*
+| Project | Focus |
+|---|---|
+| [01 · On-prem SQL Server to Azure SQL](01-onprem-sql-to-azure/README.md) | Hybrid data movement with ADF and SHIR; linked services, pipeline execution, and ARM templates |
 
----
+### Pipeline run
 
-## 🛠 Tools & Technologies
+![Azure Data Factory pipeline run succeeded](01-onprem-sql-to-azure/screenshots/pipeline-success.png)
 
-- Azure Data Factory
-- Azure SQL Database
-- SQL Server
-- Azure Storage
-- ARM Templates
-- GitHub
+## What the project demonstrates
 
----
+- Configure on-premises and Azure linked services
+- Connect ADF to an on-premises source through a locally hosted SHIR
+- Build and run a pipeline that copies SQL data into Azure SQL
+- Inspect copied rows in source and destination tables
+- Export the factory configuration as ARM templates for redeployment
+- Consider resource cleanup and cloud costs in a learning environment
 
-## 🎯 Purpose
+## Repository structure
 
-This repository is created for learning, practice, and portfolio demonstration as part of my journey toward becoming a Cloud / Data Engineer.
+- `01-onprem-sql-to-azure/README.md` — project steps, architecture, and learning outcomes
+- `01-onprem-sql-to-azure/factory/` — Data Factory assets
+- `01-onprem-sql-to-azure/linkedTemplates/` — linked ARM template artifacts
+- `01-onprem-sql-to-azure/screenshots/` — setup and execution evidence
+- `ARMTemplateForFactory.json` — exported factory template
 
----
+## Rebuild and cost awareness
 
-## 🔄 Rebuild & Cost Management
-
-All cloud resources are disposable and can be recreated using ARM templates.  
-Projects are designed to be low-cost and safe for learning environments.
+The project README describes deployment through Azure Portal using the exported ARM template. Cloud resources may incur charges; review the resources and pricing in your own subscription, and remove disposable resources when finished. The repository contains educational artifacts and does not provision resources automatically.
 
 ---
 
-## 📌 Note
-
-These projects are educational and follow best practices used in enterprise data engineering environments.
+<p align="center"><sub>Small, reproducible labs for practical cloud data engineering.</sub></p>
